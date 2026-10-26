@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPI Interaktif - Teks Deskripsi</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .nav-btn.active {
+            background-color: #4f46e5;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.4);
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 text-gray-800 flex justify-center items-center">
+
+    <div class="glass-card w-full max-w-5xl min-h-[85vh] flex flex-col overflow-hidden">
+        <!-- Header / Navbar -->
+        <header class="bg-indigo-900 text-white p-4 md:p-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-book-open text-3xl text-yellow-400"></i>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold">Media Pembelajaran Interaktif (MPI)</h1>
+                    <p class="text-xs md:text-sm text-indigo-200">Materi: Teks Deskripsi (Bahasa Indonesia)</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2 text-sm bg-indigo-800 px-4 py-2 rounded-full border border-indigo-700">
+                <i class="fa-solid fa-user-graduate text-yellow-400"></i>
+                <span>Siswa / Mode Interaktif</span>
+            </div>
+        </header>
+
+        <!-- Main Content Area with Navigation Sidebar -->
+        <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
+            <!-- Sidebar Navigation -->
+            <nav class="w-full md:w-64 bg-indigo-50 p-4 flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-y-auto border-r border-indigo-100 flex-shrink-0">
+                <button onclick="showSection('apersepsi')" id="nav-apersepsi" class="nav-btn active flex items-center gap-3 px-4 py-3 rounded-xl transition text-left font-semibold text-gray-700 hover:bg-indigo-100">
+                    <i class="fa-solid fa-lightbulb text-amber-500 w-5"></i> 1. Apersepsi
+                </button>
+                <button onclick="showSection('asesmen-awal')" id="nav-asesmen-awal" class="nav-btn flex items-center gap-3 px-4 py-3 rounded-xl transition text-left font-semibold text-gray-700 hover:bg-indigo-100">
+                    <i class="fa-solid fa-clipboard-question text-blue-500 w-5"></i> 2. Asesmen Awal
+                </button>
+                <button onclick="showSection('materi')" id="nav-materi" class="nav-btn flex items-center gap-3 px-4 py-3 rounded-xl transition text-left font-semibold text-gray-700 hover:bg-indigo-100">
+                    <i class="fa-solid fa-book text-emerald-500 w-5"></i> 3. Materi Pokok
+                </button>
+                <button onclick="showSection('simulasi')" id="nav-simulasi" class="nav-btn flex items-center gap-3 px-4 py-3 rounded-xl transition text-left font-semibold text-gray-700 hover:bg-indigo-100">
+                    <i class="fa-solid fa-wand-magic-sparkles text-purple-500 w-5"></i> 4. Simulasi
+                </button>
+                <button onclick="showSection('kuis')" id="nav-kuis" class="nav-btn flex items-center gap-3 px-4 py-3 rounded-xl transition text-left font-semibold text-gray-700 hover:bg-indigo-100">
+                    <i class="fa-solid fa-gamepad text-rose-500 w-5"></i> 5. Kuis Interaktif
+                </button>
+                <button onclick="showSection('asesmen-akhir')" id="nav-asesmen-akhir" class="nav-btn flex items-center gap-3 px-4 py-3 rounded-xl transition text-left font-semibold text-gray-700 hover:bg-indigo-100">
+                    <i class="fa-solid fa-award text-amber-600 w-5"></i> 6. Asesmen Akhir
+                </button>
+                <button onclick="showSection('refleksi')" id="nav-refleksi" class="nav-btn flex items-center gap-3 px-4 py-3 rounded-xl transition text-left font-semibold text-gray-700 hover:bg-indigo-100">
+                    <i class="fa-solid fa-heart text-red-500 w-5"></i> 7. Refleksi
+                </button>
+            </nav>
+
+            <!-- Main Dynamic Container -->
+            <main class="flex-1 p-6 md:p-8 overflow-y-auto bg-white">
+
+                <!-- 1. APERSEPSI -->
+                <section id="apersepsi" class="content-section animate__animated animate__fadeIn">
+                    <div class="border-b pb-4 mb-6">
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-100 px-3 py-1 rounded-full">Tahap 1</span>
+                        <h2 class="text-2xl font-bold text-gray-800 mt-2">Apersepsi: Membuka Pandangan</h2>
+                    </div>
+                    
+                    <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg mb-6">
+                        <p class="text-amber-900 font-medium">
+                            👋 Selamat Datang! Pernahkah kamu menceritakan keindahan tempat liburan favoritmu kepada teman hingga mereka merasa seolah-olah ikut hadir di sana?
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6 my-6">
+                        <div class="bg-gray-50 border p-5 rounded-2xl flex flex-col items-center text-center">
+                            <div class="text-5xl mb-3">🌋</div>
+                            <h3 class="font-bold text-lg mb-2 text-indigo-900">Mengamati Gambar</h3>
+                            <p class="text-sm text-gray-600">Bayangkan kamu berdiri di kaki Gunung Bromo saat matahari terbit. Udara dingin merasuk kulit, warna keemasan memenuhi langit, dan hembusan angin membawa aroma tanah basah.</p>
+                        </div>
+                        <div class="bg-indigo-50 border border-indigo-100 p-5 rounded-2xl flex flex-col justify-center">
+                            <h3 class="font-bold text-lg mb-3 text-indigo-900"><i class="fa-solid fa-eye text-indigo-600 mr-2"></i>Pertanyaan Pemantik:</h3>
+                            <ul class="space-y-3 text-sm text-gray-700">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-circle-check text-indigo-500 mt-1"></i>
+                                    <span>Pancaindra apa saja yang terlibat saat kamu membayangkan suasana tersebut?</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-circle-check text-indigo-500 mt-1"></i>
+                                    <span>Kata-kata apa yang paling cocok untuk menggambarkan suasana itu?</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="text-right mt-8">
+                        <button onclick="showSection('asesmen-awal')" class="bg-indigo-600 text-white px-6 py-3 rounded-xl hover:bg-indigo-700 font-medium shadow-md transition flex items-center gap-2 ml-auto">
+                            Lanjut ke Asesmen Awal <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- 2. ASESMEN AWAL -->
+                <section id="asesmen-awal" class="content-section hidden animate__animated animate__fadeIn">
+                    <div class="border-b pb-4 mb-6">
+                        <span class="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-100 px-3 py-1 rounded-full">Tahap 2</span>
+                        <h2 class="text-2xl font-bold text-gray-800 mt-2">Asesmen Awal (Diagnostic Assessment)</h2>
+                        <p class="text-sm text-gray-500 mt-1">Mari kita ukur sejauh mana pemahaman awalmu mengenai teks deskripsi.</p>
+                    </div>
+
+                    <div id="diag-container" class="space-y-6">
+                        <div class="bg-gray-50 p-5 rounded-xl border">
+                            <p class="font-semibold text-gray-800 mb-3">1. Manakah dari kalimat berikut yang paling menggambarkan tujuan Teks Deskripsi?</p>
+                            <div class="space-y-2">
+                                <label class="flex items-center p-3 border rounded-lg hover:bg-indigo-50 cursor-pointer">
+                                    <input type="radio" name="diag1" value="A" class="mr-3"> A. Menceritakan urutan peristiwa sejarah secara kronologis.
+                                </label>
+                                <label class="flex items-center p-3 border rounded-lg hover:bg-indigo-50 cursor-pointer">
+                                    <input type="radio" name="diag1" value="B" class="mr-3"> B. Menggambarkan objek secara rinci sehingga pembaca seolah melihat/merasakannya.
+                                </label>
+                                <label class="flex items-center p-3 border rounded-lg hover:bg-indigo-50 cursor-pointer">
+                                    <input type="radio" name="diag1" value="C" class="mr-3"> C. Membujuk pembaca agar membeli suatu produk.
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 p-5 rounded-xl border">
+                            <p class="font-semibold text-gray-800 mb-3">2. Kalimat manakah yang melibatkan indra penglihatan?</p>
+                            <div class="space-y-2">
+                                <label class="flex items-center p-3 border rounded-lg hover:bg-indigo-50 cursor-pointer">
+                                    <input type="radio" name="diag2" value="A" class="mr-3"> A. Deburan ombak terdengar menggelegar menghantam karang.
+                                </label>
+                                <label class="flex items-center p-3 border rounded-lg hover:bg-indigo-50 cursor-pointer">
+                                    <input type="radio" name="diag2" value="B" class="mr-3"> B. Kucing itu memiliki bulu putih lebat dengan mata berwarna biru jernih.
+                                </label>
+                                <label class="flex items-center p-3 border rounded-lg hover:bg-indigo-50 cursor-pointer">
+                                    <input type="radio" name="diag2" value="C" class="mr-3"> C. Aromatik kopi hangat menyeruak memenuhi ruangan.
+                                </label>
+                            </div>
+                        </div>
+
+                        <button onclick="checkDiagnostic()" class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 font-medium shadow-md transition">
+                            Cek Hasil Asesmen Awal
+                        </button>
+                    </div>
+
+                    <div id="diag-result" class="hidden mt-6 p-5 rounded-xl border"></div>
+
+                    <div class="text-right mt-8 flex justify-between">
+                        <button onclick="showSection('apersepsi')" class="text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-100">Kembali</button>
+                        <button onclick="showSection('materi')" class="bg-indigo-600 text-white px-6 py-3 rounded-xl hover:bg-indigo-700 font-medium shadow-md transition flex items-center gap-2">
+                            Lanjut ke Materi <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- 3. MATERI POKOK -->
+                <section id="materi" class="content-section hidden animate__animated animate__fadeIn">
+                    <div class="border-b pb-4 mb-6">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-100 px-3 py-1 rounded-full">Tahap 3</span>
+                        <h2 class="text-2xl font-bold text-gray-800 mt-2">Materi Pokok: Teks Deskripsi</h2>
+                    </div>
+
+                    <!-- Tabs for Material -->
+                    <div class="flex border-b mb-6 overflow-x-auto">
+                        <button onclick="switchTab('tab-pengertian')" id="btn-tab-pengertian" class="tab-btn py-2 px-4 border-b-2 border-indigo-600 font-bold text-indigo-600">Pengertian & Ciri</button>
+                        <button onclick="switchTab('tab-struktur')" id="btn-tab-struktur" class="tab-btn py-2 px-4 text-gray-500 font-medium hover:text-indigo-600">Struktur Teks</button>
+                        <button onclick="switchTab('tab-kaidah')" id="btn-tab-kaidah" class="tab-btn py-2 px-4 text-gray-500 font-medium hover:text-indigo-600">Kaidah Kebahasaan</button>
+                    </div>
+
+                    <!-- Tab Content 1 -->
+                    <div id="tab-pengertian" class="tab-content space-y-4">
+                        <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-100">
+                            <h3 class="text-lg font-bold text-emerald-900 mb-2">📌 APA ITU TEKS DESKRIPSI?</h3>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                Teks deskripsi adalah teks yang menggambarkan suatu objek, tempat, atau peristiwa secara jelas dan terperinci sehingga pembaca seolah-olah dapat melihat, mendengar, atau merasakan sendiri apa yang dideskripsikan.
+                            </p>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-4 mt-4">
+                            <div class="border p-4 rounded-xl bg-white shadow-sm">
+                                <div class="text-emerald-600 text-2xl font-bold mb-1">01</div>
+                                <h4 class="font-bold mb-1">Menggambarkan Objek</h4>
+                                <p class="text-xs text-gray-600">Fokus pada satu objek konkret (manusia, hewan, tempat, atau benda).</p>
+                            </div>
+                            <div class="border p-4 rounded-xl bg-white shadow-sm">
+                                <div class="text-emerald-600 text-2xl font-bold mb-1">02</div>
+                                <h4 class="font-bold mb-1">Pancaindra</h4>
+                                <p class="text-xs text-gray-600">Melibatkan penglihatan, pendengaran, penciuman, pengecapan, dan perabaan.</p>
+                            </div>
+                            <div class="border p-4 rounded-xl bg-white shadow-sm">
+                                <div class="text-emerald-600 text-2xl font-bold mb-1">03</div>
+                                <h4 class="font-bold mb-1">Detail & Spesifik</h4>
+                                <p class="text-xs text-gray-600">Menjelaskan ciri fisik, warna, ukuran, atau sifat objek secara rinci.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content 2 -->
+                    <div id="tab-struktur" class="tab-content hidden space-y-4">
+                        <div class="space-y-3">
+                            <div class="p-4 border-l-4 border-indigo-500 bg-gray-50 rounded-r-xl">
+                                <h4 class="font-bold text-indigo-900">1. Identifikasi / Identifikasi Umum</h4>
+                                <p class="text-sm text-gray-600">Berisi penentuan identitas objek, nama objek, lokasi, sejarah, atau gambaran umum mengenai objek yang akan dideskripsikan.</p>
+                            </div>
+                            <div class="p-4 border-l-4 border-purple-500 bg-gray-50 rounded-r-xl">
+                                <h4 class="font-bold text-purple-900">2. Deskripsi Bagian</h4>
+                                <p class="text-sm text-gray-600">Berisi gambaran perincian bagian-bagian objek berdasarkan tanggapan subjektif penulis (misal: warna, bentuk, suasana, bagian khusus).</p>
+                            </div>
+                            <div class="p-4 border-l-4 border-amber-500 bg-gray-50 rounded-r-xl">
+                                <h4 class="font-bold text-amber-900">3. Simpulan / Kesan</h4>
+                                <p class="text-sm text-gray-600">Berisi penutup yang memuat kesan umum atau penegasan penulis terhadap objek tersebut (opsional).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content 3 -->
+                    <div id="tab-kaidah" class="tab-content hidden space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="border p-4 rounded-xl">
+                                <h4 class="font-bold text-indigo-700 mb-2">1. Kata Sifat (Adjektiva)</h4>
+                                <p class="text-xs text-gray-600">Digunakan untuk menjelaskan kondisi objek. Contoh: *indah, tinggi, ramah, lebat, biru*.</p>
+                            </div>
+                            <div class="border p-4 rounded-xl">
+                                <h4 class="font-bold text-indigo-700 mb-2">2. Kata Kerja Kesan (Seraan Indra)</h4>
+                                <p class="text-xs text-gray-600">Kata yang memicu tanggapan indra. Contoh: *tampak, terdengar, terasa, wangi*.</p>
+                            </div>
+                            <div class="border p-4 rounded-xl">
+                                <h4 class="font-bold text-indigo-700 mb-2">3. Kata Khusus (Spesifik)</h4>
+                                <p class="text-xs text-gray-600">Kata umum: *Melihat* &rarr; Kata khusus: *Menatap, melirik, memandang, mengamati*.</p>
+                            </div>
+                            <div class="border p-4 rounded-xl">
+                                <h4 class="font-bold text-indigo-700 mb-2">4. Majas / Personifikasi</h4>
+                                <p class="text-xs text-gray-600">Menggambarkan benda mati seolah bernyawa. Contoh: *Nyiur melambai-lambai di tepi pantai*.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-right mt-8 flex justify-between">
+                        <button onclick="showSection('asesmen-awal')" class="text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-100">Kembali</button>
+                        <button onclick="showSection('simulasi')" class="bg-indigo-600 text-white px-6 py-3 rounded-xl hover:bg-indigo-700 font-medium shadow-md transition flex items-center gap-2">
+                            Lanjut ke Simulasi <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- 4. SIMULASI INTERAKTIF -->
+                <section id="simulasi" class="content-section hidden animate__animated animate__fadeIn">
+                    <div class="border-b pb-4 mb-6">
+                        <span class="text-xs font-bold uppercase tracking-wider text-purple-600 bg-purple-100 px-3 py-1 rounded-full">Tahap 4</span>
+                        <h2 class="text-2xl font-bold text-gray-800 mt-2">Simulasi Interaktif: "Rakit Teks Deskripsimu"</h2>
+                        <p class="text-sm text-gray-500 mt-1">Pilih komponen di bawah untuk menyusun teks deskripsi secara langsung!</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Controls -->
+                        <div class="space-y-4 bg-gray-50 p-4 rounded-xl border">
+                            <h3 class="font-bold text-gray-700">Pilih Komponen Objek: Pantai</h3>
+                            
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 mb-1">1. Judul & Identifikasi</label>
+                                <select id="sim-identifikasi" onchange="updateSimulation()" class="w-full p-2.5 border rounded-lg text-sm bg-white">
+                                    <option value="1">Pantai Kuta Bali yang Memesona</option>
+                                    <option value="2">Keindahan Alam Pantai Parangtritis</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 mb-1">2. Panca Indra Penglihatan (Warna/Suasana)</label>
+                                <select id="sim-penglihatan" onchange="updateSimulation()" class="w-full p-2.5 border rounded-lg text-sm bg-white">
+                                    <option value="1">Pasir putih bersih membentang seluas mata memandang dengan laut biru jernih.</option>
+                                    <option value="2">Matahari terbenam memancarkan jingga keemasan yang memantul di permukaan air.</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 mb-1">3. Panca Indra Pendengaran & Perabaan</label>
+                                <select id="sim-perabaan" onchange="updateSimulation()" class="w-full p-2.5 border rounded-lg text-sm bg-white">
+                                    <option value="1">Suara deburan ombak bersahut-sahutan disertai angin sepoi-sepoi yang menyejukkan.</option>
+                                    <option value="2">Hembusan angin malam terasa dingin menyentuh kulit saat ombak pelan menyapu kaki.</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 mb-1">4. Kesan Penutup</label>
+                                <select id="sim-kesan" onchange="updateSimulation()" class="w-full p-2.5 border rounded-lg text-sm bg-white">
+                                    <option value="1">Sungguh pemandangan alam yang sangat menakjubkan dan wajib dikunjungi.</option>
+                                    <option value="2">Berada di pantai ini memberikan ketenangan hati yang luar biasa.</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Live Preview Card -->
+                        <div class="bg-indigo-900 text-white p-6 rounded-xl flex flex-col justify-between shadow-inner">
+                            <div>
+                                <div class="text-xs text-yellow-400 font-bold uppercase tracking-wider mb-2"><i class="fa-solid fa-eye mr-1"></i> Live Preview Hasil Teks</div>
+                                <h3 id="preview-title" class="text-xl font-bold text-white border-b border-indigo-700 pb-2 mb-3">Pantai Kuta Bali yang Memesona</h3>
+                                <div id="preview-text" class="text-sm text-indigo-100 space-y-3 leading-relaxed">
+                                    <!-- Dynamic text -->
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-indigo-800 text-xs text-indigo-300">
+                                ⭐ Teks di atas otomatis memiliki struktur: <i>Identifikasi &rarr; Deskripsi Bagian &rarr; Simpulan</i>.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-right mt-8 flex justify-between">
+                        <button onclick="showSection('materi')" class="text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-100">Kembali</button>
+                        <button onclick="showSection('kuis')" class="bg-indigo-600 text-white px-6 py-3 rounded-xl hover:bg-indigo-700 font-medium shadow-md transition flex items-center gap-2">
+                            Lanjut ke Kuis <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- 5. KUIS INTERAKTIF -->
+                <section id="kuis" class="content-section hidden animate__animated animate__fadeIn">
+                    <div class="border-b pb-4 mb-6">
+                        <span class="text-xs font-bold uppercase tracking-wider text-rose-600 bg-rose-100 px-3 py-1 rounded-full">Tahap 5</span>
+                        <h2 class="text-2xl font-bold text-gray-800 mt-2">Kuis Interaktif Latihan</h2>
+                        <p class="text-sm text-gray-500 mt-1">Uji pemahamanmu dengan kuis interaktif berikut ini!</p>
+                    </div>
+
+                    <div id="quiz-box" class="bg-gray-50 p-6 rounded-xl border">
+                        <div class="flex justify-between items-center mb-4">
+                            <span id="quiz-progress" class="text-xs font-bold text-indigo-600 bg-indigo-100 px-3 py-1 rounded-full">Soal 1 dari 3</span>
+                            <span id="quiz-score-badge" class="text-xs font-bold text-emerald-600 bg-emerald-100 px-3 py-1 rounded-full">Skor: 0</span>
+                        </div>
+
+                        <h3 id="quiz-question" class="font-bold text-lg text-gray-800 mb-4">Pertanyaan akan muncul di sini...</h3>
+
+                        <div id="quiz-options" class="space-y-3">
+                            <!-- Dynamic Options -->
+                        </div>
+
+                        <div id="quiz-feedback" class="mt-4 p-3 rounded-lg hidden font-medium text-sm"></div>
+                    </div>
+
+                    <div class="text-right mt-8 flex justify-between">
+                        <button onclick="showSection('simulasi')" class="text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-100">Kembali</button>
+                        <button onclick="showSection('asesmen-akhir')" class="bg-indigo-600 text-white px-6 py-3 rounded-xl hover:bg-indigo-700 font-medium shadow-md transition flex items-center gap-2">
+                            Lanjut ke Asesmen Akhir <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- 6. ASESMEN AKHIR -->
+                <section id="asesmen-akhir" class="content-section hidden animate__animated animate__fadeIn">
+                    <div class="border-b pb-4 mb-6">
+                        <span class="text-xs font-bold uppercase tracking-wider text-amber-600 bg-amber-100 px-3 py-1 rounded-full">Tahap 6</span>
+                        <h2 class="text-2xl font-bold text-gray-800 mt-2">Asesmen Akhir (Summative Test)</h2>
+                        <p class="text-sm text-gray-500 mt-1">Selesaikan tes akhir untuk mengukur ketuntasan belajar materi Teks Deskripsi.</p>
+                    </div>
+
+                    <form id="final-test-form" onsubmit="submitFinalTest(event)" class="space-y-6">
+                        <div class="bg-gray-50 p-4 rounded-xl border">
+                            <p class="font-semibold text-gray-800 mb-2">1. Kalimat berikut yang menggunakan kata khusus (spesifik) untuk kata 'melihat' adalah...</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="block p-2 rounded hover:bg-indigo-50 cursor-pointer"><input type="radio" name="f1" value="A" required> A. Ibu melihat pemandangan gunung.</label>
+                                <label class="block p-2 rounded hover:bg-indigo-50 cursor-pointer"><input type="radio" name="f1" value="B"> B. Ayah menatap lekat-lekat foto kenangan lama itu.</label>
+                                <label class="block p-2 rounded hover:bg-indigo-50 cursor-pointer"><input type="radio" name="f1" value="C"> C. Kami melihat pameran lukisan kemarin.</label>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 p-4 rounded-xl border">
+                            <p class="font-semibold text-gray-800 mb-2">2. "Matahari terbit menyapa bumi dengan sinar hangatnya." Kalimat tersebut menggunakan majas...</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="block p-2 rounded hover:bg-indigo-50 cursor-pointer"><input type="radio" name="f2" value="A" required> A. Hiperbola</label>
+                                <label class="block p-2 rounded hover:bg-indigo-50 cursor-pointer"><input type="radio" name="f2" value="B"> B. Personifikasi</label>
+                                <label class="block p-2 rounded hover:bg-indigo-50 cursor-pointer"><input type="radio" name="f2" value="C"> C. Metafora</label>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 p-4 rounded-xl border">
+                            <p class="font-semibold text-gray-800 mb-2">3. Bagian struktur teks deskripsi yang berisi deskripsi mengenai rincian ciri-ciri fisik objek dinamakan...</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="block p-2 rounded hover:bg-indigo-50 cursor-pointer"><input type="radio" name="f3" value="A" required> A. Identifikasi</label>
+                                <label class="block p-2 rounded hover:bg-indigo-50 cursor-pointer"><input type="radio" name="f3" value="B"> B. Deskripsi Bagian</label>
+                                <label class="block p-2 rounded hover:bg-indigo-50 cursor-pointer"><input type="radio" name="f3" value="C"> C. Simpulan</label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-3 rounded-xl hover:bg-emerald-700 shadow-md transition">
+                            Kirim Jawaban Asesmen Akhir
+                        </button>
+                    </form>
+
+                    <div id="final-result" class="hidden mt-6 p-6 rounded-xl border text-center"></div>
+
+                    <div class="text-right mt-8 flex justify-between">
+                        <button onclick="showSection('kuis')" class="text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-100">Kembali</button>
+                        <button onclick="showSection('refleksi')" class="bg-indigo-600 text-white px-6 py-3 rounded-xl hover:bg-indigo-700 font-medium shadow-md transition flex items-center gap-2">
+                            Lanjut ke Refleksi <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- 7. REFLEKSI -->
+                <section id="refleksi" class="content-section hidden animate__animated animate__fadeIn">
+                    <div class="border-b pb-4 mb-6">
+                        <span class="text-xs font-bold uppercase tracking-wider text-red-600 bg-red-100 px-3 py-1 rounded-full">Tahap 7</span>
+                        <h2 class="text-2xl font-bold text-gray-800 mt-2">Refleksi Pembelajaran</h2>
+                        <p class="text-sm text-gray-500 mt-1">Mari utarakan pengalaman belajarmu hari ini!</p>
+                    </div>
+
+                    <div class="bg-rose-50 border border-rose-100 p-6 rounded-2xl space-y-4">
+                        <h3 class="font-bold text-rose-900">Bagaimana Perasaanmu Setelah Belajar?</h3>
+                        <div class="flex justify-around text-4xl py-2">
+                            <button onclick="selectEmoji(this)" class="hover:scale-125 transition transform p-2">😍</button>
+                            <button onclick="selectEmoji(this)" class="hover:scale-125 transition transform p-2">😀</button>
+                            <button onclick="selectEmoji(this)" class="hover:scale-125 transition transform p-2">😐</button>
+                            <button onclick="selectEmoji(this)" class="hover:scale-125 transition transform p-2">🙁</button>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Apa hal baru paling menarik yang kamu pelajari hari ini?</label>
+                            <textarea id="reflection-text" rows="3" class="w-full p-3 border rounded-xl text-sm" placeholder="Tuliskan pengalaman belajarmu di sini..."></textarea>
+                        </div>
+
+                        <button onclick="saveReflection()" class="bg-rose-600 text-white font-bold px-6 py-2.5 rounded-xl hover:bg-rose-700 transition">
+                            Simpan Refleksi
+                        </button>
+                        <div id="ref-saved-msg" class="hidden text-xs text-emerald-600 font-bold mt-2">✓ Refleksi berhasil disimpan! Selamat atas penyelesaian materi hari ini!</div>
+                    </div>
+
+                    <div class="text-right mt-8 flex justify-between">
+                        <button onclick="showSection('asesmen-akhir')" class="text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-100">Kembali</button>
+                        <button onclick="alert('Selamat! Anda telah menyelesaikan seluruh rangkaian Media Pembelajaran Interaktif ini 🎉')" class="bg-emerald-600 text-white px-6 py-3 rounded-xl hover:bg-emerald-700 font-medium shadow-md transition">
+                            Selesai 🎉
+                        </button>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Section Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(sec => sec.classList.add('hidden'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(sectionId).classList.remove('hidden');
+            const navBtn = document.getElementById('nav-' + sectionId);
+            if(navBtn) navBtn.classList.add('active');
+        }
+
+        // Diagnostic Assessment Logic
+        function checkDiagnostic() {
+            const q1 = document.querySelector('input[name="diag1"]:checked');
+            const q2 = document.querySelector('input[name="diag2"]:checked');
+            const resultBox = document.getElementById('diag-result');
+
+            if(!q1 || !q2) {
+                alert('Harap jawab semua pertanyaan asesmen awal!');
+                return;
+            }
+
+            let score = 0;
+            if(q1.value === 'B') score++;
+            if(q2.value === 'B') score++;
+
+            resultBox.classList.remove('hidden');
+            if(score === 2) {
+                resultBox.className = "mt-6 p-5 rounded-xl border bg-emerald-50 border-emerald-200 text-emerald-900";
+                resultBox.innerHTML = `<strong>Sangat Baik! 🎉</strong> Kamu sudah memahami konsep dasar teks deskripsi dengan sangat baik. Silakan lanjut pelajari materi lebih mendalam.`;
+            } else {
+                resultBox.className = "mt-6 p-5 rounded-xl border bg-amber-50 border-amber-200 text-amber-900";
+                resultBox.innerHTML = `<strong>Bagus! 👍</strong> Kamu sudah memiliki pemahaman awal. Mari pelajari materi pokok untuk menyempurnakan pemahamanmu.`;
+            }
+        }
+
+        // Material Tab Switch
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-b-2', 'border-indigo-600', 'font-bold', 'text-indigo-600');
+                btn.classList.add('text-gray-500');
+            });
+
+            document.getElementById(tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.add('border-b-2', 'border-indigo-600', 'font-bold', 'text-indigo-600');
+            activeBtn.classList.remove('text-gray-500');
+        }
+
+        // Simulation Logic
+        function updateSimulation() {
+            const identifikasi = document.getElementById('sim-identifikasi');
+            const penglihatan = document.getElementById('sim-penglihatan');
+            const perabaan = document.getElementById('sim-perabaan');
+            const kesan = document.getElementById('sim-kesan');
+
+            const title = identifikasi.options[identifikasi.selectedIndex].text;
+            document.getElementById('preview-title').innerText = title;
+
+            document.getElementById('preview-text').innerHTML = `
+                <p><strong>[Identifikasi]</strong> ${title} merupakan salah satu destinasi wisata populer yang menyajikan panorama menakjubkan.</p>
+                <p><strong>[Deskripsi Bagian]</strong> ${penglihatan.options[penglihatan.selectedIndex].text} ${perabaan.options[perabaan.selectedIndex].text}</p>
+                <p><strong>[Simpulan]</strong> ${kesan.options[kesan.selectedIndex].text}</p>
+            `;
+        }
+        updateSimulation();
+
+        // Quiz Interactive Data & Logic
+        const quizData = [
+            {
+                q: "Objek manakah yang paling sesuai dijadikan topik Teks Deskripsi?",
+                options: ["Langkah-langkah membuat mi instan", "Keindahan Candi Borobudur di Pagi Hari", "Alasan pentingnya menjaga kebersihan"],
+                answer: 1
+            },
+            {
+                q: "Manakah kalimat yang memuat panca indra PENDENGARAN?",
+                options: ["Suara gemericik air sungai menenangkan jiwa", "Kain sutra itu terasa sangat halus saat disentuh", "Bunga mawar merah itu mekar dengan indah"],
+                answer: 0
+            },
+            {
+                q: "Kalimat: 'Awan hitam berarak menyelimuti kota.' Kalimat ini menggambarkan indra...",
+                options: ["Perabaan", "Penglihatan", "Penciuman"],
+                answer: 1
+            }
+        ];
+
+        let currentQuiz = 0;
+        let quizScore = 0;
+
+        function loadQuiz() {
+            if(currentQuiz >= quizData.length) {
+                document.getElementById('quiz-box').innerHTML = `
+                    <div class="text-center py-8">
+                        <i class="fa-solid fa-circle-check text-5xl text-emerald-500 mb-3"></i>
+                        <h3 class="text-2xl font-bold text-gray-800">Kuis Selesai!</h3>
+                        <p class="text-gray-600 mt-2">Skor Akhir Kuis Latihanmu: <span class="text-indigo-600 font-bold text-xl">${quizScore * 33 + 1} / 100</span></p>
+                    </div>
+                `;
+                confetti();
+                return;
+            }
+
+            const q = quizData[currentQuiz];
+            document.getElementById('quiz-progress').innerText = `Soal ${currentQuiz + 1} dari ${quizData.length}`;
+            document.getElementById('quiz-question').innerText = q.q;
+            
+            const optionsDiv = document.getElementById('quiz-options');
+            optionsDiv.innerHTML = '';
+            document.getElementById('quiz-feedback').classList.add('hidden');
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3 border rounded-xl hover:bg-indigo-50 transition text-sm font-medium";
+                btn.innerText = opt;
+                btn.onclick = () => answerQuiz(idx);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function answerQuiz(selectedIdx) {
+            const q = quizData[currentQuiz];
+            const feedback = document.getElementById('quiz-feedback');
+            feedback.classList.remove('hidden');
+
+            if(selectedIdx === q.answer) {
+                quizScore++;
+                document.getElementById('quiz-score-badge').innerText = `Skor: ${quizScore * 33 + 1}`;
+                feedback.className = "mt-4 p-3 rounded-lg font-medium text-sm bg-emerald-100 text-emerald-800";
+                feedback.innerText = "Benar sekali! ✨";
+            } else {
+                feedback.className = "mt-4 p-3 rounded-lg font-medium text-sm bg-rose-100 text-rose-800";
+                feedback.innerText = "Kurang tepat. Tetap semangat!";
+            }
+
+            setTimeout(() => {
+                currentQuiz++;
+                loadQuiz();
+            }, 1200);
+        }
+
+        loadQuiz();
+
+        // Final Test Logic
+        function submitFinalTest(e) {
+            e.preventDefault();
+            const f1 = document.querySelector('input[name="f1"]:checked').value;
+            const f2 = document.querySelector('input[name="f2"]:checked').value;
+            const f3 = document.querySelector('input[name="f3"]:checked').value;
+
+            let finalScore = 0;
+            if(f1 === 'B') finalScore += 33;
+            if(f2 === 'B') finalScore += 33;
+            if(f3 === 'B') finalScore += 34;
+
+            const resDiv = document.getElementById('final-result');
+            resDiv.classList.remove('hidden');
+            resDiv.className = "mt-6 p-6 rounded-xl border bg-indigo-50 border-indigo-200 text-indigo-900";
+            resDiv.innerHTML = `
+                <h3 class="text-xl font-bold mb-2">Hasil Asesmen Akhir</h3>
+                <p class="text-3xl font-extrabold text-indigo-600 mb-2">${finalScore} / 100</p>
+                <p class="text-sm text-gray-600">${finalScore >= 70 ? 'Selamat! Kamu telah mencapai Kriteria Ketuntasan Minimal (KKM).' : 'Perlu belajar lagi, ulangi materi dan latihan kuis.'}</p>
+            `;
+
+            if(finalScore >= 70) confetti();
+        }
+
+        // Reflection Logic
+        function selectEmoji(btn) {
+            document.querySelectorAll('#refleksi button').forEach(b => b.classList.remove('bg-rose-200', 'rounded-full'));
+            btn.classList.add('bg-rose-200', 'rounded-full');
+        }
+
+        function saveReflection() {
+            document.getElementById('ref-saved-msg').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
